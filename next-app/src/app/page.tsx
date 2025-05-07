@@ -1,8 +1,8 @@
 // import Image from "next/image";
 // import styles from "./page.module.css";
 
-import { Heading } from "@chakra-ui/react";
+import DummyPageComponent from "@/components/dummy/dummy-page";
 
 export default function Home() {
-  return <Heading>hello world!</Heading>;
+  return <DummyPageComponent />;
 }
