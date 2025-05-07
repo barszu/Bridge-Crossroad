@@ -7,7 +7,8 @@
     "build": "echo 'Custom rules activated!' && next build",
     "start": "next start",
     "lint": "echo 'Custom rules activated!' && next lint",
-    "get_llm_context": "mkdir contexts && curl -o ./contexts/llm-full.txt https://chakra-ui.com/llms-full.txt"
+    "get_llm_context": "mkdir contexts && curl -o ./contexts/llm-full.txt https://chakra-ui.com/llms-full.txt",
+    "test": "echo 'No tests specified' && exit 0"
   },
   "dependencies": {
     "@chakra-ui/react": "^3.17.0",
