@@ -1,3 +1,4 @@
+import { Box, Container, Flex, Image } from "@chakra-ui/react";
 import * as React from "react";
 
 export interface IAuthLayoutProps {
@@ -5,5 +6,46 @@ export interface IAuthLayoutProps {
 }
 
 export default function AuthLayout({ children }: IAuthLayoutProps) {
-  return <>{children}</>;
+  return (
+    <>
+      <Flex minH="100vh" position="relative">
+        {/* left side */}
+        <Box
+          flex="1"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          zIndex={1}
+        >
+          <Container maxW="md">{children}</Container>
+        </Box>
+        {/* right side with background image */}
+        <Box
+          flex="1"
+          display={{ base: "none", md: "block" }}
+          position="relative"
+          bg="white"
+        >
+          <Box
+            position="absolute"
+            right={0}
+            top={0}
+            bottom={0}
+            w="100%"
+            h="100%"
+            zIndex={0}
+          >
+            <Image
+              src="/auth/splash-art-lightmode.svg"
+              alt="Background with a trophy"
+              objectFit="cover"
+              objectPosition="right"
+              w="100%"
+              h="100%"
+            />
+          </Box>
+        </Box>
+      </Flex>
+    </>
+  );
 }
