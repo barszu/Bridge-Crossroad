@@ -2,22 +2,38 @@ import type { Metadata } from "next";
 import "./globals.css";
 import ChakraCustomProvider from "@/components/chakra-config/custom-provider";
 import ReactQuerryProvider from "@/components/external-libs/react-querry/provider";
+import { Montserrat } from "next/font/google";
+import { NextIntlClientProvider } from "next-intl";
+import { getLocale } from "next-intl/server";
 
 export const metadata: Metadata = {
   title: "Bridge CrossRoad",
-  description: "Autorzy: Szymon Kubiczek, Bartłomiej Szubiak, Joanna Konieczny",
+  description: "Authors: Szymon Kubiczek, Bartłomiej Szubiak, Joanna Konieczny",
 };
 
-export default function RootLayout({
+const montserrat = Montserrat({
+  subsets: ["latin", "latin-ext"],
+  variable: "--font-montserrat",
+});
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getLocale();
+
   return (
-    <html suppressHydrationWarning lang="pl">
+    <html
+      suppressHydrationWarning
+      lang={locale}
+      className={montserrat.variable}
+    >
       <body>
         <ChakraCustomProvider>
-          <ReactQuerryProvider>{children}</ReactQuerryProvider>
+          <ReactQuerryProvider>
+            <NextIntlClientProvider>{children}</NextIntlClientProvider>
+          </ReactQuerryProvider>
         </ChakraCustomProvider>
       </body>
     </html>

@@ -11,8 +11,8 @@ export const system = createSystem(defaultConfig, {
         secondary: { value: "#EE0F0F" },
       },
       fonts: {
-        heading: { value: `'Figtree', sans-serif` },
-        body: { value: `'Figtree', sans-serif` },
+        heading: { value: "var(--font-montserrat)" },
+        body: { value: "var(--font-montserrat)" },
       },
     },
   },
