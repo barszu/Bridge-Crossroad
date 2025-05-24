@@ -4,5 +4,9 @@
 import DummyPageComponent from "@/components/dummy/dummy-page";
 
 export default function Home() {
-  return <DummyPageComponent />;
+  return (
+    <>
+      <DummyPageComponent />
+    </>
+  );
 }

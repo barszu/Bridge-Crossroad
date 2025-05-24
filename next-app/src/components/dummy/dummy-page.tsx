@@ -4,8 +4,11 @@
 
 import { Heading } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
+import { useTranslations } from "next-intl";
 
 export default function DummyPageComponent() {
+  const t = useTranslations("DummyPage");
+
   const { data, isFetched } = useQuery({
     queryKey: ["dummy"],
     queryFn: async () => {
@@ -17,7 +20,8 @@ export default function DummyPageComponent() {
 
   return (
     <>
-      <Heading>hello world!</Heading>
+      <Heading>{t("text")}</Heading>
+      <Heading>{t("description.text")}</Heading>
       <Heading>{isFetched ? JSON.stringify(data) : "fetching..."}</Heading>
     </>
   );
