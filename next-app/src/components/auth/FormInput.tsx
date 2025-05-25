@@ -14,6 +14,8 @@ export interface IFormInputProps {
   isRequired?: boolean;
   type?: "password" | "text" | "email" | "number";
   onElementProps?: FormControlProps;
+  value?: string;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
 }
 
 export default function FormInput(props: IFormInputProps) {
@@ -25,14 +27,19 @@ export default function FormInput(props: IFormInputProps) {
       {...props.onElementProps}
     >
       <FormErrorMessage>{props.errorMessage}</FormErrorMessage>
-
       {props.type === "password" ? (
-        <PasswordInput placeholder={props.placeholder} />
+        <PasswordInput
+          placeholder={props.placeholder}
+          value={props.value}
+          onChange={props.onChange}
+        />
       ) : (
         <Input
           placeholder={props.placeholder}
           type={props.type}
           focusBorderColor="accent.500"
+          value={props.value}
+          onChange={props.onChange}
         />
       )}
     </FormControl>

@@ -11,6 +11,8 @@ import { MdVisibility, MdVisibilityOff } from "react-icons/md";
 
 export interface IPasswordInputProps {
   placeholder?: string;
+  value?: string;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
 }
 
 export default function PasswordInput(props: IPasswordInputProps) {
@@ -21,17 +23,19 @@ export default function PasswordInput(props: IPasswordInputProps) {
     <InputGroup size="md">
       <Input
         placeholder={props.placeholder}
-        type={show ? "password" : ""}
+        type={show ? "password" : "text"}
         focusBorderColor="accent.500"
-        fontSize={show && !isEmpty ? "3xl" : ""} // for bigger dots
-        lineHeight={show ? "short" : ""} // for bigger dots
+        value={props.value}
         onChange={(e) => {
           if (e.target.value === "") {
             setIsEmpty.on();
           } else {
             setIsEmpty.off();
           }
+          if (props.onChange) props.onChange(e);
         }}
+        fontSize={show && !isEmpty ? "3xl" : undefined}
+        lineHeight={show ? "short" : undefined}
       />
       <InputRightElement>
         <IconButton
