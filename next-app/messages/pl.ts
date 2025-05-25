@@ -23,9 +23,11 @@ const messages = {
       form: {
         loginOrEmailField: {
           placeholder: "Login lub email",
+          errorMessage: "Podaj poprawny login lub email",
         },
         passwordField: {
           placeholder: "Hasło",
+          errorMessage: "Podaj poprawne hasło",
         },
       },
       utilities: {
