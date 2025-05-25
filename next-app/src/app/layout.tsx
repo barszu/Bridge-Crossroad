@@ -30,11 +30,11 @@ export default async function RootLayout({
       className={montserrat.variable}
     >
       <body>
-        <ChakraCustomProvider>
-          <ReactQuerryProvider>
-            <NextIntlClientProvider>{children}</NextIntlClientProvider>
-          </ReactQuerryProvider>
-        </ChakraCustomProvider>
+        <ReactQuerryProvider>
+          <NextIntlClientProvider>
+            <ChakraCustomProvider>{children}</ChakraCustomProvider>
+          </NextIntlClientProvider>
+        </ReactQuerryProvider>
       </body>
     </html>
   );
