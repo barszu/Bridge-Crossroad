@@ -1,76 +1,149 @@
-import {
-  Box,
-  Text,
-  Button,
-  Checkbox,
-  Heading,
-  HStack,
-  Input,
-  Stack,
-} from "@chakra-ui/react";
+"use client";
+
+import { HStack, Stack } from "@chakra-ui/react";
+import { useForm, Controller } from "react-hook-form";
 import FormLayout from "../FormLayout";
 import { useTranslations } from "next-intl";
-import { FcGoogle } from "react-icons/fc";
 import ChakraLink from "@/components/chakra-config/ChakraLink";
+import FormHeading from "../FormHeading";
+import FormInput from "../FormInput";
+import { userSchema } from "@/schemas/user";
+import GoogleButton from "../FormGoogleButton";
+import FormMainButton from "../FormMainButton";
+import FormCheckbox from "../FormCheckbox";
+
+type FormValues = {
+  loginOrEmail: string;
+  password: string;
+  rememberMe: boolean;
+};
 
 export default function LoginForm() {
   const t = useTranslations("Auth.LoginPage");
+  const { handleSubmit, control } = useForm<FormValues>();
+
+  const onSubmit = (data: FormValues) => {
+    alert(JSON.stringify(data));
+  };
+
   return (
     <FormLayout>
-      {/* Login Form */}
-      <Stack spacing={1} mt={8}>
-        {/* Login, no account link */}
-        <Box>
-          <Heading fontSize="2xl" mb={4}>
-            {t("title")}
-          </Heading>
-          <HStack>
-            <Text fontSize="sm">{t("noAccount.text")}</Text>
-            <ChakraLink fontSize="sm" href="/auth/register" color="accent.500">
-              {t("noAccount.link")}
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Stack spacing={2} mt={8}>
+          <FormHeading
+            title={t("title")}
+            href="/auth/register"
+            AccountText={t("noAccount.text")}
+            AccountLink={t("noAccount.link")}
+          />
+
+          <Controller
+            control={control}
+            name="loginOrEmail"
+            defaultValue=""
+            rules={{
+              required: t("form.loginOrEmailField.errorMessage"),
+              validate: (value: string) => {
+                if (value.includes("@")) {
+                  // as email
+                  return (
+                    userSchema.emailSchema.regex.test(value) ||
+                    t("form.loginOrEmailField.invalidEmail")
+                  );
+                } else {
+                  // as login
+                  if (value.length < userSchema.loginSchema.minLength) {
+                    return t("form.loginOrEmailField.minLengthLogin", {
+                      minLength: userSchema.loginSchema.minLength,
+                    });
+                  }
+                  if (value.length > userSchema.loginSchema.maxLength) {
+                    return t("form.loginOrEmailField.maxLengthLogin", {
+                      maxLength: userSchema.loginSchema.maxLength,
+                    });
+                  }
+                  if (!userSchema.loginSchema.regex.test(value)) {
+                    return t("form.loginOrEmailField.invalidLoginSyntax");
+                  }
+                  return true;
+                }
+              },
+            }}
+            render={({ field, fieldState: { error } }) => (
+              <FormInput
+                placeholder={t("form.loginOrEmailField.placeholder")}
+                errorMessage={
+                  error?.message ?? t("form.loginOrEmailField.errorMessage")
+                }
+                isInvalid={!!error}
+                id="loginOrEmail"
+                type="text"
+                value={field.value}
+                onChange={field.onChange}
+              />
+            )}
+          />
+
+          <Controller
+            control={control}
+            name="password"
+            defaultValue=""
+            rules={{
+              required: t("form.passwordField.errorMessage"),
+              minLength: {
+                value: userSchema.passwordSchema.minLength,
+                message: t("form.passwordField.minLength", {
+                  minLength: userSchema.passwordSchema.minLength,
+                }),
+              },
+              maxLength: {
+                value: userSchema.passwordSchema.maxLength,
+                message: t("form.passwordField.maxLength", {
+                  maxLength: userSchema.passwordSchema.maxLength,
+                }),
+              },
+            }}
+            render={({ field, fieldState: { error } }) => (
+              <FormInput
+                placeholder={t("form.passwordField.placeholder")}
+                errorMessage={
+                  error?.message ?? t("form.passwordField.errorMessage")
+                }
+                isInvalid={!!error}
+                id="password"
+                type="password"
+                value={field.value}
+                onChange={field.onChange}
+              />
+            )}
+          />
+
+          <HStack justify="space-between" pt={4}>
+            <Controller
+              control={control}
+              name="rememberMe"
+              defaultValue={true}
+              render={({ field }) => (
+                <FormCheckbox
+                  text={t("utilities.rememberMe")}
+                  onElementProps={{
+                    isChecked: field.value,
+                    onChange: (e) => field.onChange(e.target.checked),
+                  }}
+                />
+              )}
+            />
+            <ChakraLink color="accent.500" href="/auth/forgot-password">
+              {t("utilities.forgotPassword")}
             </ChakraLink>
           </HStack>
-        </Box>
 
-        {/* TODO login */}
-        <Input
-          placeholder={t("form.loginOrEmailField.placeholder")}
-          borderRadius="md"
-        />
-
-        {/* TODO haslo */}
-        <Input
-          placeholder={t("form.loginOrEmailField.placeholder")}
-          borderRadius="md"
-        />
-
-        <HStack justify="space-between" pt={4}>
-          {/* TODO checkbox */}
-          <Checkbox defaultChecked colorScheme="accent">
-            {t("utilities.rememberMe")}
-          </Checkbox>
-
-          {/* TODO forgotpass */}
-          <ChakraLink
-            color="accent.500"
-            fontSize="sm"
-            href="/auth/forgot-password"
-          >
-            {t("utilities.forgotPassword")}
-          </ChakraLink>
-        </HStack>
-
-        <Stack pt={2}>
-          {/* login via google */}
-          <Button variant="outline" size="lg" leftIcon={<FcGoogle />}>
-            {t("submitButtons.loginWithGoogle")}
-          </Button>
-          {/* login */}
-          <Button colorScheme="accent" size="lg">
-            {t("submitButtons.login")}
-          </Button>
+          <Stack spacing={3}>
+            <GoogleButton text={t("submitButtons.loginWithGoogle")} />
+            <FormMainButton text={t("submitButtons.login")} type="submit" />
+          </Stack>
         </Stack>
-      </Stack>
+      </form>
     </FormLayout>
   );
 }

@@ -24,6 +24,7 @@ export const theme = extendTheme({
       },
     },
   },
+  components: {},
   fonts: {
     heading: "var(--font-montserrat)",
     body: "var(--font-montserrat)",
