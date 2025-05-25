@@ -2,9 +2,38 @@
 
 // only for demo purposes
 
-import { Heading } from "@chakra-ui/react";
+import {
+  Button,
+  Heading,
+  IconButton,
+  useColorMode,
+  useColorModeValue,
+  VStack,
+} from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
+import { BsMoon, BsSun } from "react-icons/bs";
+
+function Toggle() {
+  // Chakra UI hook that toggle the color mode
+  const { toggleColorMode } = useColorMode();
+  return (
+    <VStack>
+      {useColorModeValue(
+        <Heading>Light Mode</Heading>,
+        <Heading>Dark Mode</Heading>
+      )}
+      <IconButton
+        aria-label="Mode Change"
+        variant="outline"
+        colorScheme="black"
+        size="lg"
+        icon={useColorModeValue(<BsMoon />, <BsSun />)}
+        onClick={toggleColorMode}
+      />
+    </VStack>
+  );
+}
 
 export default function DummyPageComponent() {
   const t = useTranslations("DummyPage");
@@ -23,6 +52,12 @@ export default function DummyPageComponent() {
       <Heading>{t("text")}</Heading>
       <Heading>{t("description.text")}</Heading>
       <Heading>{isFetched ? JSON.stringify(data) : "fetching..."}</Heading>
+      <Button colorScheme="accent">color scheme</Button>
+      <Button colorScheme="accent" variant={"ghost"}>
+        color scheme
+      </Button>
+      <Button bgColor="accent.500"> bg color</Button>
+      <Toggle />
     </>
   );
 }

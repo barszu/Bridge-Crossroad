@@ -3,81 +3,70 @@ import {
   Text,
   Button,
   Checkbox,
-  Field,
   Heading,
   HStack,
   Input,
-  Link,
   Stack,
 } from "@chakra-ui/react";
 import FormLayout from "../FormLayout";
 import { useTranslations } from "next-intl";
-import NextLink from "next/link";
 import { FcGoogle } from "react-icons/fc";
+import ChakraLink from "@/components/chakra-config/ChakraLink";
 
 export default function LoginForm() {
   const t = useTranslations("Auth.LoginPage");
   return (
     <FormLayout>
-      {/* Formularz logowania */}
-      <Stack spaceY={1} mt={8}>
-        {/* Nagłówek formularza */}
+      {/* Login Form */}
+      <Stack spacing={1} mt={8}>
+        {/* Login, no account link */}
         <Box>
           <Heading fontSize="2xl" mb={4}>
             {t("title")}
           </Heading>
           <HStack>
             <Text fontSize="sm">{t("noAccount.text")}</Text>
-            <Link
-              fontSize="sm"
-              as={NextLink}
-              href="/auth/register"
-              color="purple.500"
-            >
+            <ChakraLink fontSize="sm" href="/auth/register" color="accent.500">
               {t("noAccount.link")}
-            </Link>
+            </ChakraLink>
           </HStack>
         </Box>
 
         {/* TODO login */}
-        <Field.Root>
-          <Input
-            placeholder={t("form.loginOrEmailField.placeholder")}
-            borderRadius="md"
-          />
-        </Field.Root>
+        <Input
+          placeholder={t("form.loginOrEmailField.placeholder")}
+          borderRadius="md"
+        />
 
         {/* TODO haslo */}
-        <Field.Root>
-          <Input
-            placeholder={t("form.loginOrEmailField.placeholder")}
-            borderRadius="md"
-          />
-        </Field.Root>
+        <Input
+          placeholder={t("form.loginOrEmailField.placeholder")}
+          borderRadius="md"
+        />
 
         <HStack justify="space-between" pt={4}>
           {/* TODO checkbox */}
-          <Checkbox.Root colorScheme="purple">
-            <Checkbox.HiddenInput />
-            <Checkbox.Control>
-              <Checkbox.Indicator />
-            </Checkbox.Control>
-            <Checkbox.Label>{t("utilities.rememberMe")}</Checkbox.Label>
-          </Checkbox.Root>
+          <Checkbox defaultChecked colorScheme="accent">
+            {t("utilities.rememberMe")}
+          </Checkbox>
+
           {/* TODO forgotpass */}
-          <Link color="purple.500" fontSize="sm">
+          <ChakraLink
+            color="accent.500"
+            fontSize="sm"
+            href="/auth/forgot-password"
+          >
             {t("utilities.forgotPassword")}
-          </Link>
+          </ChakraLink>
         </HStack>
 
         <Stack pt={2}>
           {/* login via google */}
-          <Button variant="outline" size="lg" w="100%" borderColor="gray.200">
-            <FcGoogle />
+          <Button variant="outline" size="lg" leftIcon={<FcGoogle />}>
             {t("submitButtons.loginWithGoogle")}
           </Button>
           {/* login */}
-          <Button bgColor={"purple.500"} size="lg" w="100%">
+          <Button colorScheme="accent" size="lg">
             {t("submitButtons.login")}
           </Button>
         </Stack>

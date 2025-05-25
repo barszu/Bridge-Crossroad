@@ -8,11 +8,11 @@ export default function FormLayout({
 }) {
   const t = useTranslations("common");
   return (
-    <Stack bgColor={""} mb={8}>
-      {/* Logo i nazwa */}
+    <Stack mb={8}>
+      {/* Logo and appName */}
       <HStack justify="space-between">
         <HStack>
-          <Box w="8px" h="80px" bg="purple.500" borderRadius="2px" />
+          <Box w="8px" h="80px" bg="accent.500" borderRadius="2px" />
           <Text fontSize="4xl" fontWeight="bold" lineHeight="1">
             {t("appNameWords.first")} <br /> {t("appNameWords.second")}
           </Text>

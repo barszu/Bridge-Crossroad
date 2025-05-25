@@ -1,26 +1,75 @@
 "use client";
 
-// needed for better compatibility :)
+import { theme } from "@/components/chakra-config/theme";
+import { ChakraProvider } from "@chakra-ui/react";
+import { CacheProvider } from "@chakra-ui/next-js";
+import SafeHydration from "../util/SafeHydration";
 
-// context for llms
-// https://chakra-ui.com/docs/get-started/llms
+// export default function CustomChakraProvider({
+//   children,
+// }: Readonly<{
+//   children: React.ReactNode;
+// }>) {
+//   return (
+//     <ChakraDefaultProvider theme={theme}>{children}</ChakraDefaultProvider>
+//   );
+// }
 
-// help
-// https://chakra-ui.com/docs/get-started/migration
-// https://chakra-ui.com/docs/components/concepts/overview
-// https://chakra-ui.com/docs/charts/pie-chart
-// https://chakra-ui.com/docs/styling/overview
-// https://chakra-ui.com/docs/theming/overview
+// export default function CustomChakraProvider({
+//   children,
+// }: {
+//   children: React.ReactNode;
+// }) {
+//   return (
+//     // <ThemeProvider attribute="class" disableTransitionOnChange>
+//     <ChakraProvider theme={theme}>{children}</ChakraProvider>
+//     // </ThemeProvider>
+//   );
+// }
 
-import { Provider as ChakraDefaultProvider } from "@/components/external-libs/chakra-default/ui/provider";
-import { system } from "@/components/chakra-config/system";
+// export default function CustomChakraProvider({
+//   children,
+// }: {
+//   children: React.ReactNode;
+// }) {
+//   return (
+//     <>
+//       <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+//       <ChakraProvider theme={theme}>{children}</ChakraProvider>
+//     </>
+//   );
+// }
+
+// export default function CustomChakraProvider({
+//   children,
+// }: {
+//   children: React.ReactNode;
+// }) {
+//   return (
+//     <ThemeProvider
+//       attribute="class"
+//       defaultTheme={theme.config.initialColorMode}
+//       disableTransitionOnChange
+//     >
+//       <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+//       <ChakraProvider theme={theme}>{children}</ChakraProvider>
+//     </ThemeProvider>
+//   );
+// }
 
 export default function CustomChakraProvider({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <ChakraDefaultProvider system={system}>{children}</ChakraDefaultProvider>
+    <CacheProvider>
+      <SafeHydration>
+        <ChakraProvider theme={theme}>
+          {/* render after mount */}
+          {children}
+        </ChakraProvider>
+      </SafeHydration>
+    </CacheProvider>
   );
 }

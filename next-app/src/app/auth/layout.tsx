@@ -24,24 +24,12 @@ export default function AuthLayout({ children }: IAuthLayoutProps) {
           flex="1"
           display={{ base: "none", md: "block" }}
           position="relative"
-          bg="white"
         >
-          <Box
-            position="absolute"
-            right={0}
-            top={0}
-            bottom={0}
-            w="100%"
-            h="100%"
-            zIndex={0}
-          >
+          <Box position="absolute" right={0} zIndex={0}>
             <Image
               src="/auth/splash-art-lightmode.svg"
               alt="Background with a trophy"
-              objectFit="cover"
-              objectPosition="right"
-              w="100%"
-              h="100%"
+              h="100vh"
             />
           </Box>
         </Box>
