@@ -3,8 +3,9 @@ import ChakraLink from "../chakra-config/ChakraLink";
 
 export interface IFormHeadingProps {
   title: string;
-  noAccountText: string;
-  noAccountLink: string;
+  AccountText: string;
+  AccountLink: string;
+  href: string;
   onElementProps?: BoxProps;
 }
 
@@ -15,9 +16,9 @@ export default function FormHeading(props: IFormHeadingProps) {
         {props.title}
       </Heading>
       <HStack>
-        <Text>{props.noAccountText}</Text>
-        <ChakraLink href="/auth/register" color="accent.500">
-          {props.noAccountLink}
+        <Text>{props.AccountText}</Text>
+        <ChakraLink href={props.href} color="accent.500">
+          {props.AccountLink}
         </ChakraLink>
       </HStack>
     </Box>

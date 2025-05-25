@@ -1,14 +1,16 @@
 "use client";
 
-import { Button, Checkbox, HStack, Stack } from "@chakra-ui/react";
+import { HStack, Stack } from "@chakra-ui/react";
 import { useForm, Controller } from "react-hook-form";
 import FormLayout from "../FormLayout";
 import { useTranslations } from "next-intl";
-import { FcGoogle } from "react-icons/fc";
 import ChakraLink from "@/components/chakra-config/ChakraLink";
 import FormHeading from "../FormHeading";
 import FormInput from "../FormInput";
 import { userSchema } from "@/schemas/user";
+import GoogleButton from "../FormGoogleButton";
+import FormMainButton from "../FormMainButton";
+import FormCheckbox from "../FormCheckbox";
 
 type FormValues = {
   loginOrEmail: string;
@@ -30,8 +32,9 @@ export default function LoginForm() {
         <Stack spacing={2} mt={8}>
           <FormHeading
             title={t("title")}
-            noAccountText={t("noAccount.text")}
-            noAccountLink={t("noAccount.link")}
+            href="/auth/register"
+            AccountText={t("noAccount.text")}
+            AccountLink={t("noAccount.link")}
           />
 
           <Controller
@@ -88,15 +91,15 @@ export default function LoginForm() {
             rules={{
               required: t("form.passwordField.errorMessage"),
               minLength: {
-                value: userSchema.password.minLength,
+                value: userSchema.passwordSchema.minLength,
                 message: t("form.passwordField.minLength", {
-                  minLength: userSchema.password.minLength,
+                  minLength: userSchema.passwordSchema.minLength,
                 }),
               },
               maxLength: {
-                value: userSchema.password.maxLength,
+                value: userSchema.passwordSchema.maxLength,
                 message: t("form.passwordField.maxLength", {
-                  maxLength: userSchema.password.maxLength,
+                  maxLength: userSchema.passwordSchema.maxLength,
                 }),
               },
             }}
@@ -121,14 +124,13 @@ export default function LoginForm() {
               name="rememberMe"
               defaultValue={true}
               render={({ field }) => (
-                <Checkbox
-                  isChecked={field.value}
-                  onChange={(e) => field.onChange(e.target.checked)}
-                  colorScheme="accent"
-                  size="md"
-                >
-                  {t("utilities.rememberMe")}
-                </Checkbox>
+                <FormCheckbox
+                  text={t("utilities.rememberMe")}
+                  onElementProps={{
+                    isChecked: field.value,
+                    onChange: (e) => field.onChange(e.target.checked),
+                  }}
+                />
               )}
             />
             <ChakraLink color="accent.500" href="/auth/forgot-password">
@@ -137,17 +139,8 @@ export default function LoginForm() {
           </HStack>
 
           <Stack spacing={3}>
-            <Button
-              variant="outline"
-              size="lg"
-              leftIcon={<FcGoogle />}
-              type="button"
-            >
-              {t("submitButtons.loginWithGoogle")}
-            </Button>
-            <Button colorScheme="accent" size="lg" type="submit">
-              {t("submitButtons.login")}
-            </Button>
+            <GoogleButton text={t("submitButtons.loginWithGoogle")} />
+            <FormMainButton text={t("submitButtons.login")} type="submit" />
           </Stack>
         </Stack>
       </form>

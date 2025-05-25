@@ -7,8 +7,22 @@ export const userSchema = {
     maxLength: 16,
     regex: /^[a-zA-Z0-9_-]+$/,
   },
-  password: {
+  passwordSchema: {
     minLength: 6,
     maxLength: 16,
+    upperCaseRegex: /(?=.*[A-Z])/,
+    lowerCaseRegex: /(?=.*[a-z])/,
+    digitRegex: /(?=.*\d)/,
+    specialCharRegex: /(?=.*[!@#$%^&*(),.?":{}|<>])/,
+  },
+  nameSchema: {
+    minLength: 2,
+    maxLength: 50,
+    regex: /^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]+$/,
+  },
+  surnameSchema: {
+    minLength: 2,
+    maxLength: 50,
+    regex: /^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]+$/,
   },
 };

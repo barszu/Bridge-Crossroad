@@ -1,3 +1,9 @@
+const nameFields = {
+  minLength: "Min. {minLength} znaki",
+  maxLength: "Max. {maxLength} znaków",
+  invalidNameSyntax: "Tylko litery",
+};
+
 const authForm = {
   loginField: {
     placeholder: "Login",
@@ -13,6 +19,10 @@ const authForm = {
     maxLength: "Hasło nie może być dłuższe niż {maxLength} znaków",
     invalidPasswordSyntax:
       "Hasło musi zawierać wielkie, małe litery, cyfry i znaki specjalne",
+    noLowerCase: "Hasło musi zawierać małe litery",
+    noUpperCase: "Hasło musi zawierać wielkie litery",
+    noDigit: "Hasło musi zawierać cyfry",
+    noSpecialChar: "Hasło musi zawierać znaki specjalne",
   },
   emailField: {
     placeholder: "E-mail",
@@ -22,16 +32,16 @@ const authForm = {
   nameField: {
     placeholder: "Imię",
     errorMessage: "Podaj poprawne imię",
-    minLength: "Imię musi mieć co najmniej {minLength} znaki",
-    maxLength: "Imię nie może być dłuższe niż {maxLength} znaków",
-    invalidNameSyntax: "Imię może zawierać tylko litery",
+    minLength: nameFields.minLength,
+    maxLength: nameFields.maxLength,
+    invalidNameSyntax: nameFields.invalidNameSyntax,
   },
   surnameField: {
     placeholder: "Nazwisko",
     errorMessage: "Podaj poprawne nazwisko",
-    minLength: "Nazwisko musi mieć co najmniej {minLength} znaki",
-    maxLength: "Nazwisko nie może być dłuższe niż {maxLength} znaków",
-    invalidSurnameSyntax: "Nazwisko może zawierać tylko litery",
+    minLength: nameFields.minLength,
+    maxLength: nameFields.maxLength,
+    invalidSurnameSyntax: nameFields.invalidNameSyntax,
   },
   repeatPasswordField: {
     placeholder: "Powtórz hasło",
