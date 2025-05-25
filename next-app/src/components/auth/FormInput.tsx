@@ -26,7 +26,7 @@ export default function FormInput(props: IFormInputProps) {
       isRequired={props.isRequired}
       {...props.onElementProps}
     >
-      <FormErrorMessage>{props.errorMessage}</FormErrorMessage>
+      <FormErrorMessage mb={2}>{props.errorMessage}</FormErrorMessage>
       {props.type === "password" ? (
         <PasswordInput
           placeholder={props.placeholder}
@@ -40,6 +40,7 @@ export default function FormInput(props: IFormInputProps) {
           focusBorderColor="accent.500"
           value={props.value}
           onChange={props.onChange}
+          _focus={{ borderColor: "accent.500" }}
         />
       )}
     </FormControl>

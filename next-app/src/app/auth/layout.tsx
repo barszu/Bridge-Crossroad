@@ -8,7 +8,7 @@ export interface IAuthLayoutProps {
 export default function AuthLayout({ children }: IAuthLayoutProps) {
   return (
     <>
-      <Flex minH="100vh" position="relative">
+      <Flex minH="100vh" position="relative" overflow={"hidden"}>
         {/* left side */}
         <Box
           flex="1"
@@ -25,7 +25,7 @@ export default function AuthLayout({ children }: IAuthLayoutProps) {
           display={{ base: "none", md: "block" }}
           position="relative"
         >
-          <Box position="absolute" right={0} bottom={0} zIndex={0} h="100%">
+          <Box position="absolute" right={0} bottom={-1} zIndex={0} h="100%">
             <Image
               src="/auth/splash-art-lightmode.svg"
               alt="Background with a trophy"

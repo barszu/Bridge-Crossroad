@@ -36,11 +36,14 @@ export default function PasswordInput(props: IPasswordInputProps) {
         }}
         fontSize={show && !isEmpty ? "3xl" : undefined}
         lineHeight={show ? "short" : undefined}
+        _focus={{ borderColor: "accent.500", outline: "none" }}
       />
       <InputRightElement>
         <IconButton
           aria-label={show ? "Ukryj hasło" : "Pokaż hasło"}
-          icon={<Icon as={show ? MdVisibilityOff : MdVisibility} />}
+          icon={
+            <Icon as={show ? MdVisibilityOff : MdVisibility} fontSize={"xl"} />
+          }
           onClick={setShow.toggle}
           size="md"
           variant="ghost"

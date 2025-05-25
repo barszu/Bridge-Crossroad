@@ -1,3 +1,44 @@
+const authForm = {
+  loginField: {
+    placeholder: "Login",
+    errorMessage: "Podaj poprawny login",
+    invalidLoginSyntax: "Login może zawierać tylko litery, cyfry, _ i -",
+    minLength: "Login musi mieć co najmniej {minLength} znaki",
+    maxLength: "Login nie może być dłuższy niż {maxLength} znaków",
+  },
+  passwordField: {
+    placeholder: "Hasło",
+    errorMessage: "Podaj poprawne hasło",
+    minLength: "Hasło musi mieć co najmniej {minLength} znaków",
+    maxLength: "Hasło nie może być dłuższe niż {maxLength} znaków",
+    invalidPasswordSyntax:
+      "Hasło musi zawierać wielkie, małe litery, cyfry i znaki specjalne",
+  },
+  emailField: {
+    placeholder: "E-mail",
+    errorMessage: "Podaj poprawny adres e-mail",
+    maxLength: "E-mail nie może być dłuższy niż {maxLength} znaków",
+  },
+  nameField: {
+    placeholder: "Imię",
+    errorMessage: "Podaj poprawne imię",
+    minLength: "Imię musi mieć co najmniej {minLength} znaki",
+    maxLength: "Imię nie może być dłuższe niż {maxLength} znaków",
+    invalidNameSyntax: "Imię może zawierać tylko litery",
+  },
+  surnameField: {
+    placeholder: "Nazwisko",
+    errorMessage: "Podaj poprawne nazwisko",
+    minLength: "Nazwisko musi mieć co najmniej {minLength} znaki",
+    maxLength: "Nazwisko nie może być dłuższe niż {maxLength} znaków",
+    invalidSurnameSyntax: "Nazwisko może zawierać tylko litery",
+  },
+  repeatPasswordField: {
+    placeholder: "Powtórz hasło",
+    errorMessage: "Hasła nie pasują do siebie",
+  },
+};
+
 const messages = {
   DummyPage: {
     text: "Witaj świecie!",
@@ -24,11 +65,12 @@ const messages = {
         loginOrEmailField: {
           placeholder: "Login lub email",
           errorMessage: "Podaj poprawny login lub email",
+          invalidEmail: authForm.emailField.errorMessage,
+          invalidLoginSyntax: authForm.loginField.invalidLoginSyntax,
+          minLengthLogin: authForm.loginField.minLength,
+          maxLengthLogin: authForm.loginField.maxLength,
         },
-        passwordField: {
-          placeholder: "Hasło",
-          errorMessage: "Podaj poprawne hasło",
-        },
+        passwordField: authForm.passwordField,
       },
       utilities: {
         rememberMe: "Zapamiętaj mnie",
@@ -46,21 +88,11 @@ const messages = {
         link: "Zaloguj się",
       },
       form: {
-        nameField: {
-          placeholder: "Imię",
-        },
-        surnameField: {
-          placeholder: "Nazwisko",
-        },
-        emailField: {
-          placeholder: "E-mail",
-        },
-        passwordField: {
-          placeholder: "Hasło (8-16 znaków)",
-        },
-        repeatPasswordField: {
-          placeholder: "Powtórz hasło",
-        },
+        nameField: authForm.nameField,
+        surnameField: authForm.surnameField,
+        emailField: authForm.emailField,
+        passwordField: authForm.passwordField,
+        repeatPasswordField: authForm.repeatPasswordField,
       },
       utilities: {
         rememberMe: "Zapamiętaj mnie",
